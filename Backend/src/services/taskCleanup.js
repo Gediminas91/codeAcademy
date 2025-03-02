@@ -1,27 +1,44 @@
 import cron from "node-cron";
-import { db } from "../config/db.js";
+import { connectDB, db } from "../config/db.js";
 
 const DELETE_AFTER_DAYS = 7;
 
 const deleteCompletedTasks = async () => {
   try {
+    if (!db) {
+      console.error(
+        "❌ Database connection not established. Skipping cleanup."
+      );
+      return;
+    }
+
     const expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() - DELETE_AFTER_DAYS);
+    expirationDate.setUTCHours(0, 0, 0, 0);
 
     const result = await db.collection("Tasks").deleteMany({
       status: "Completed",
       completedAt: { $lt: expirationDate },
     });
 
-    console.log(`✅ Deleted ${result.deletedCount} completed tasks.`);
+    if (result.deletedCount > 0) {
+      console.log(`✅ Deleted ${result.deletedCount} completed tasks.`);
+    } else {
+      console.log("🚀 No completed tasks found for deletion.");
+    }
   } catch (error) {
     console.error("❌ Failed to delete old completed tasks:", error);
   }
 };
 
-cron.schedule("0 0 * * *", async () => {
-  console.log("🔄 Running cleanup for completed tasks...");
-  await deleteCompletedTasks();
-});
+const startCleanup = async () => {
+  await connectDB();
+  console.log("🔄 Scheduled cleanup for completed tasks...");
 
-export default deleteCompletedTasks;
+  cron.schedule("0 0 * * *", async () => {
+    console.log("⏳ Running scheduled cleanup for completed tasks...");
+    await deleteCompletedTasks();
+  });
+};
+
+startCleanup();
