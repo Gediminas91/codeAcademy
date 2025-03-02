@@ -42,6 +42,7 @@ router.post("/", authenticateUser, async (req, res) => {
     const newTask = {
       ...req.body,
       userId: req.user.userId,
+      date: new Date(),
     };
 
     const result = await db.collection("Tasks").insertOne(newTask);
@@ -54,7 +55,14 @@ router.post("/", authenticateUser, async (req, res) => {
 router.put("/:id", authenticateUser, async (req, res) => {
   try {
     const taskId = req.params.id;
-    const updatedTask = req.body;
+    const updatedTask = {
+      ...req.body,
+      updatedAt: new Date(),
+    };
+
+    if (req.body.status === "Completed") {
+      updatedTask.completedAt = new Date();
+    }
 
     const query = { _id: new ObjectId(taskId), userId: req.user.userId };
     const result = await db
