@@ -26,7 +26,7 @@ const useAuth = () => {
       const data = await response.json();
 
       if (endpoint === "register" || endpoint === "login") {
-        localStorage.setItem("token", data.token); // Store JWT
+        localStorage.setItem("token", data.token);
         console.log("🔑 Token saved:", data.token);
       }
 

@@ -1,12 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  FaTasks,
-  FaRobot,
-  FaChartLine,
-  FaPlus,
-  FaSignOutAlt,
-} from "react-icons/fa";
+import { FaTasks, FaRobot, FaChartLine, FaPlus } from "react-icons/fa";
 import Navbar from "../components/Navbar";
 
 const Dashboard = () => {
@@ -18,7 +12,7 @@ const Dashboard = () => {
       try {
         const token = localStorage.getItem("token");
         if (!token) {
-          navigate("/login"); // Redirect if no token
+          navigate("/login");
           return;
         }
 
@@ -34,7 +28,7 @@ const Dashboard = () => {
         setUser(data);
       } catch (error) {
         console.error("Error fetching user:", error);
-        setUser({ name: "Guest", email: "N/A" }); // Fallback if error occurs
+        setUser({ name: "Guest", email: "N/A" });
       }
     };
 
@@ -45,9 +39,7 @@ const Dashboard = () => {
     <div className="min-h-screen bg-gray-100">
       <Navbar />
 
-      {/* Main Dashboard Content */}
       <div className="max-w-6xl mx-auto py-12 px-6">
-        {/* Welcome Section */}
         <div className="bg-white shadow-md rounded-lg p-6 mb-8">
           {user ? (
             <>
@@ -61,7 +53,6 @@ const Dashboard = () => {
           )}
         </div>
 
-        {/* Quick Actions Section */}
         <div className="grid md:grid-cols-3 gap-6">
           <Link
             to="/tasks"
@@ -101,7 +92,6 @@ const Dashboard = () => {
           </Link>
         </div>
 
-        {/* Add Task & Recent Activity Section */}
         <div className="mt-12 grid md:grid-cols-2 gap-6">
           <button
             className="bg-blue-600 text-white w-full py-4 rounded-lg flex items-center justify-center text-lg hover:bg-blue-700 transition"

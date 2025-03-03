@@ -6,19 +6,16 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("token"); // Remove token from local storage
-    navigate("/"); // Redirect to login page
+    localStorage.removeItem("token");
+    navigate("/");
   };
 
   return (
     <nav className="bg-white shadow-md py-4 px-8 flex justify-between items-center">
-      {/* Left Side: Logo & Dashboard Link */}
       <div className="flex items-center space-x-6">
-        {/* Logo (not clickable) */}
         <img src={TaskManager} alt="Logo" className="h-10 w-10" />
       </div>
 
-      {/* Navigation Links */}
       <div className="space-x-6">
         <Link to="/dashboard" className="text-gray-700 hover:text-blue-600">
           Dashboard
@@ -36,8 +33,6 @@ const Navbar = () => {
           Reports
         </Link>
       </div>
-
-      {/* Logout Button */}
       <button
         onClick={handleLogout}
         className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
