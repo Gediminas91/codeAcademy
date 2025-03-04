@@ -1,10 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const useAuth = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-  const navigate = useNavigate();
 
   const handleAuth = async (endpoint, userData) => {
     setError("");
@@ -25,16 +23,18 @@ const useAuth = () => {
 
       const data = await response.json();
 
-      if (endpoint === "register" || endpoint === "login") {
-        localStorage.setItem("token", data.token);
-        console.log("🔑 Token saved:", data.token);
+      if (data.token) {
+        localStorage.setItem("token", data.token); // ✅ Store token
+        console.log("🔑 Token saved:", localStorage.getItem("token")); // Debugging
       }
 
       setSuccess(true);
-      setTimeout(
-        () => navigate(endpoint === "login" ? "/dashboard" : "/login"),
-        4000
-      );
+
+      setTimeout(() => {
+        if (endpoint === "register" || endpoint === "login") {
+          window.location.href = "/dashboard"; // ✅ Redirect to dashboard immediately
+        }
+      }, 1500);
     } catch (err) {
       setError(err.message);
     }

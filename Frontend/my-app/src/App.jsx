@@ -7,12 +7,11 @@ import RegisterForm from "./components/RegisterForm";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import Tasks from "./pages/Tasks";
-import Navbar from "./components/Navbar";
+import AISuggestions from "./pages/AISuggestions";
 
 function App() {
   return (
     <Router>
-      <Navbar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/tasks" element={<Tasks />} />
@@ -21,6 +20,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
+        <Route path="/ai-suggestions" element={<AISuggestions />} />
       </Routes>
     </Router>
   );

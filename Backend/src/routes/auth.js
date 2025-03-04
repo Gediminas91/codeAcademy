@@ -38,15 +38,41 @@ router.get("/user", async (req, res) => {
 router.post("/register", async (req, res) => {
   try {
     const { name, email, password } = req.body;
+
+    if (!name || !email || !password) {
+      console.error("❌ Missing required fields");
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
     const existingUser = await findUserByEmail(email);
     if (existingUser) {
+      console.error("❌ Email already in use:", email);
       return res.status(400).json({ message: "Email already in use" });
     }
 
     const userId = await createUser(name, email, password);
-    res.json({ message: "User registered successfully", userId });
+
+    if (!userId) {
+      console.error("❌ Failed to create user in database");
+      return res.status(500).json({ message: "User creation failed" });
+    }
+
+    const token = jwt.sign({ userId, email }, JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    console.log("✅ Registration Successful:", { userId, token });
+
+    res.json({
+      message: "User registered successfully",
+      userId,
+      token,
+    });
   } catch (error) {
-    res.status(500).json({ message: "Registration failed" });
+    console.error("🚨 Registration Error:", error);
+    res
+      .status(500)
+      .json({ message: "Registration failed", error: error.message });
   }
 });
 

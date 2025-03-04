@@ -7,6 +7,22 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+export const generateTaskAnalysis = async () => {
+  return "Your tasks are well-balanced, but you have too many 'In Progress' tasks. Try completing them before starting new ones.";
+};
+
+export const generateTaskTemplates = async () => {
+  return [
+    "📌 Project Planning: Define scope → Set deadlines → Assign tasks.",
+    "📌 Daily Standup: Discuss yesterday's work → Plan today's work → Identify blockers.",
+    "📌 Writing Blog Post: Research topic → Draft content → Edit → Publish.",
+  ];
+};
+
+export const generateWorkflowSuggestion = async (input) => {
+  return `Based on your work habit (${input}), consider using time-blocking to enhance productivity.`;
+};
+
 export const generateTaskSuggestion = async (taskDescription) => {
   try {
     const response = await openai.chat.completions.create({

@@ -2,10 +2,12 @@ import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import Button from "../utils/Button";
 import InputField from "../utils/InputField";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = ({ setShowRegister, setShowHome }) => {
   const { handleAuth, error, success } = useAuth();
   const [user, setUser] = useState({ name: "", email: "", password: "" });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -27,9 +29,13 @@ const RegisterForm = ({ setShowRegister, setShowHome }) => {
       {!success && (
         <form
           className="mt-6 space-y-4"
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
-            handleAuth("register", user);
+            const response = await handleAuth("register", user);
+            if (response?.token) {
+              localStorage.setItem("token", response.token); // ✅ Save token after registration
+              navigate("/dashboard"); // ✅ Redirect to dashboard
+            }
           }}
         >
           <InputField
