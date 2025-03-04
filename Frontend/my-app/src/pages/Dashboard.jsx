@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaTasks, FaRobot, FaChartLine, FaPlus } from "react-icons/fa";
-import Navbar from "../components/Navbar";
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -12,7 +11,7 @@ const Dashboard = () => {
       try {
         const token = localStorage.getItem("token");
         if (!token) {
-          navigate("/login");
+          navigate("/");
           return;
         }
 
@@ -37,8 +36,6 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <Navbar />
-
       <div className="max-w-6xl mx-auto py-12 px-6">
         <div className="bg-white shadow-md rounded-lg p-6 mb-8">
           {user ? (

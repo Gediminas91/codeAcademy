@@ -25,13 +25,37 @@ router.get("/", authenticateUser, async (req, res) => {
       tasks.sort(
         (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]
       );
-      return res.json(tasks);
+
+      const formattedTasks = tasks.map((task) => ({
+        ...task,
+        date: task.date
+          ? new Date(task.date).toISOString()
+          : new Date().toISOString(),
+        updatedAt: task.updatedAt
+          ? new Date(task.updatedAt).toISOString()
+          : null,
+        completedAt: task.completedAt
+          ? new Date(task.completedAt).toISOString()
+          : null,
+      }));
+
+      res.json(formattedTasks);
     } else if (sortBy === "dueDate") {
       tasksQuery = tasksQuery.sort({ dueDate: 1 });
     }
 
     const tasks = await tasksQuery.toArray();
-    res.json(tasks);
+
+    const formattedTasks = tasks.map((task) => ({
+      ...task,
+      date: task.date ? new Date(task.date).toISOString() : null,
+      updatedAt: task.updatedAt ? new Date(task.updatedAt).toISOString() : null,
+      completedAt: task.completedAt
+        ? new Date(task.completedAt).toISOString()
+        : null,
+    }));
+
+    res.json(formattedTasks);
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch tasks" });
   }
