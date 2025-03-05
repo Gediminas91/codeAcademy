@@ -8,7 +8,7 @@ export default function AISuggestions() {
   const [taskAnalysis, setTaskAnalysis] = useState(null);
   const [taskTemplates, setTaskTemplates] = useState([]);
   const [workflowSuggestion, setWorkflowSuggestion] = useState(null);
-  const [workflowInput, setWorkflowInput] = useState(""); // ✅ Now being used
+  const [workflowInput, setWorkflowInput] = useState("");
   const [savedSuggestions, setSavedSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);

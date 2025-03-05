@@ -6,6 +6,7 @@ import taskRoutes from "./src/routes/tasks.js";
 import authRoutes from "./src/routes/auth.js";
 import aiRoutes from "./src/routes/aiRoutes.js";
 import "./src/services/taskCleanup.js";
+import reportsRoutes from "./src/routes/reports.js";
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use("/api/tasks", taskRoutes);
 app.use("/api/auth", authRoutes);
 
 app.use("/api/ai", aiRoutes);
+app.use("/api/reports", reportsRoutes);
 
 app.get("/", (req, res) => {
   res.json("TaskManager is running");

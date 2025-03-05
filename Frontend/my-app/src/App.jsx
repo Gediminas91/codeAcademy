@@ -8,6 +8,7 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import Tasks from "./pages/Tasks";
 import AISuggestions from "./pages/AISuggestions";
+import Reports from "./pages/Reports";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
         <Route path="/ai-suggestions" element={<AISuggestions />} />
+        <Route path="/reports" element={<Reports />} />
       </Routes>
     </Router>
   );
