@@ -61,8 +61,6 @@ router.post("/register", async (req, res) => {
       expiresIn: "1h",
     });
 
-    console.log("✅ Registration Successful:", { userId, token });
-
     res.json({
       message: "User registered successfully",
       userId,

@@ -36,8 +36,7 @@ export default function Tasks() {
         const priorityOrder = { low: 1, medium: 2, high: 3 };
         return priorityOrder[a.priority] - priorityOrder[b.priority];
       }
-      if (filters.sortBy === "dueDate")
-        return new Date(a.dueDate) - new Date(b.dueDate);
+      if (filters.sortBy === "date") return new Date(a.date) - new Date(b.date);
       return 0;
     });
 
@@ -93,7 +92,7 @@ export default function Tasks() {
             <option value="">Sort By</option>
             <option value="title">Title (A-Z)</option>
             <option value="priority">Priority (Low → High)</option>
-            <option value="dueDate">Due Date (Oldest → Newest)</option>
+            <option value="date">Date (Oldest → Newest)</option>
           </select>
         </div>
 
