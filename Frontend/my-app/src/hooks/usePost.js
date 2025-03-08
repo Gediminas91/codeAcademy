@@ -8,10 +8,9 @@ export function usePost(apiUrl, setTasks) {
     setLoading(true);
     setError(null);
     try {
-      // ✅ Ensure date is included when posting a task
       const newTask = {
         ...taskData,
-        date: new Date().toISOString(), // Automatically sets a valid date
+        date: new Date().toISOString(), 
       };
 
       const response = await fetch(apiUrl, {
@@ -26,7 +25,6 @@ export function usePost(apiUrl, setTasks) {
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || "Failed to add task");
 
-      // ✅ Ensure new task has a valid date in state update
       setTasks((prevTasks) => [...prevTasks, { ...newTask, _id: data.taskId }]);
     } catch (err) {
       setError(err.message);

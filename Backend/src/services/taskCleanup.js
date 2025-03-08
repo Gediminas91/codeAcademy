@@ -1,7 +1,7 @@
 import cron from "node-cron";
 import { connectDB, db } from "../config/db.js";
 
-const DELETE_AFTER_DAYS = 7;
+const DELETE_AFTER_DAYS = 5;
 
 const deleteCompletedTasks = async () => {
   try {
