@@ -6,6 +6,7 @@ import { useDelete } from "../hooks/useDelete";
 import TaskItem from "../components/TaskItem";
 import AddTask from "../components/AddTask";
 import Navbar from "../components/Navbar";
+import FilterSortControls from "../components/FilterSortControls";
 
 const TASKS_API_URL = "http://localhost:3000/api/tasks";
 
@@ -49,52 +50,14 @@ export default function Tasks() {
           <h1 className="text-2xl font-bold">Tasks</h1>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600"
+            className="hidden sm:block bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 cursor-pointer"
           >
             + New Task
           </button>
         </div>
 
         {/* ✅ Dropdown Filters */}
-        <div className="flex gap-4 mb-4">
-          <select
-            name="status"
-            value={filters.status}
-            onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-            className="p-2 border rounded"
-          >
-            <option value="">All Status</option>
-            <option value="Pending">Pending</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Completed">Completed</option>
-          </select>
-
-          <select
-            name="priority"
-            value={filters.priority}
-            onChange={(e) =>
-              setFilters({ ...filters, priority: e.target.value })
-            }
-            className="p-2 border rounded"
-          >
-            <option value="">All Priorities</option>
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-          </select>
-
-          <select
-            name="sortBy"
-            value={filters.sortBy}
-            onChange={(e) => setFilters({ ...filters, sortBy: e.target.value })}
-            className="p-2 border rounded"
-          >
-            <option value="">Sort By</option>
-            <option value="title">Title (A-Z)</option>
-            <option value="priority">Priority (Low → High)</option>
-            <option value="date">Date (Oldest → Newest)</option>
-          </select>
-        </div>
+        <FilterSortControls filters={filters} setFilters={setFilters} />
 
         {/* Error & Loading */}
         {loading && <p>Loading tasks...</p>}
@@ -119,6 +82,12 @@ export default function Tasks() {
             postTask={postTask}
           />
         )}
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="sm:hidden fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-3xl hover:bg-blue-600 cursor-pointer"
+        >
+          +
+        </button>
       </div>
     </>
   );

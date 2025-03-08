@@ -43,37 +43,46 @@ export default function TaskItem({ task, updateTask, deleteTask }) {
       <div className="flex-1">
         <h3 className="text-lg font-bold">{task.title}</h3>
         <p className="text-gray-600">{task.description}</p>
-        <div className="flex items-center gap-3 mt-2">
-          <span className="text-sm font-semibold text-gray-600">Priority:</span>
-          <span
-            className={`px-3 py-1 text-sm font-semibold rounded-lg ${
-              priorityColors[task.priority]
-            }`}
-          >
-            {task.priority}
-          </span>
-          <span className="text-sm font-semibold text-gray-600">Status:</span>
-          <span
-            className={`px-3 py-1 text-sm font-semibold rounded-lg ${
-              task.status === "Completed"
-                ? "bg-green-200 text-green-800"
-                : "bg-yellow-200 text-yellow-800"
-            }`}
-          >
-            {task.status}
-          </span>
+        <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3 mt-2">
+          <div className="flex items-center gap-1 md:gap-2">
+            <span className="text-xs md:text-sm font-semibold text-gray-600">
+              Priority:
+            </span>
+            <span
+              className={`px-2 py-1 text-xs md:text-sm font-semibold rounded-lg ${
+                priorityColors[task.priority]
+              }`}
+            >
+              {task.priority}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-1 md:gap-2">
+            <span className="text-xs md:text-sm font-semibold text-gray-600">
+              Status:
+            </span>
+            <span
+              className={`px-2 py-1 text-xs md:text-sm font-semibold rounded-lg ${
+                task.status === "Completed"
+                  ? "bg-green-200 text-green-800"
+                  : "bg-yellow-200 text-yellow-800"
+              }`}
+            >
+              {task.status}
+            </span>
+          </div>
         </div>
         {/* Dates */}
-        <p className="text-gray-500 text-sm mt-2">
+        <p className="text-gray-500 text-xs md:text-sm mt-2">
           Created At: {new Date(task.date).toLocaleDateString()}
         </p>
         {task.updatedAt && (
-          <p className="text-gray-500 text-sm">
+          <p className="text-gray-500 text-xs md:text-sm">
             Updated At: {new Date(task.updatedAt).toLocaleDateString()}
           </p>
         )}
         {task.status === "Completed" && task.completedAt && (
-          <p className="text-gray-500 text-sm">
+          <p className="text-gray-500 text-xs md:text-sm">
             Completed At: {new Date(task.completedAt).toLocaleDateString()}
           </p>
         )}
@@ -83,7 +92,7 @@ export default function TaskItem({ task, updateTask, deleteTask }) {
           <div className="mt-3 p-3 border rounded bg-gray-100 text-gray-700 relative">
             <button
               onClick={() => setShowSuggestion(false)}
-              className="absolute top-1 right-2 text-gray-600 hover:text-black text-sm"
+              className="absolute top-1 right-2 text-gray-600 hover:text-black text-sm cursor-pointer"
             >
               ✖
             </button>
@@ -99,19 +108,19 @@ export default function TaskItem({ task, updateTask, deleteTask }) {
       <div className="flex flex-col gap-2 ml-4">
         <button
           onClick={() => setIsEditing(true)}
-          className="px-3 py-1 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600"
+          className="px-2 py-1 text-xs md:px-3 md:py-1 md:text-sm bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 cursor-pointer"
         >
           Edit
         </button>
         <button
           onClick={() => deleteTask(task._id)}
-          className="px-3 py-1 bg-red-500 text-white rounded-lg shadow hover:bg-red-600"
+          className="px-2 py-1 text-xs md:px-3 md:py-1 md:text-sm bg-red-500 text-white rounded-lg shadow hover:bg-red-600 cursor-pointer"
         >
           Delete
         </button>
         <button
           onClick={handleAISuggestion}
-          className="px-3 py-1 bg-gray-300 text-black rounded-lg shadow hover:bg-gray-400"
+          className="px-2 py-1 text-xs md:px-3 md:py-1 md:text-sm bg-gray-300 text-black rounded-lg shadow hover:bg-gray-400 cursor-pointer"
         >
           AI Suggestion
         </button>
@@ -166,14 +175,14 @@ export default function TaskItem({ task, updateTask, deleteTask }) {
             </select>
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white p-2 rounded-lg shadow hover:bg-blue-600 transition-all"
+              className="w-full bg-blue-500 text-white p-2 rounded-lg shadow hover:bg-blue-600 transition-all cursor-pointer"
             >
               Save Changes
             </button>
             <button
               onClick={() => setIsEditing(false)}
               type="button"
-              className="w-full text-gray-600 hover:text-black transition-all"
+              className="w-full text-gray-600 hover:text-black transition-all cursor-pointer"
             >
               Cancel
             </button>

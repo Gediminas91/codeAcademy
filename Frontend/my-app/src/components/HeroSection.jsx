@@ -33,13 +33,13 @@ const HeroSection = ({ setShowRegister, setShowLogin }) => {
       <div className="mt-10 space-x-4">
         <button
           onClick={() => setShowRegister("register")}
-          className="px-8 py-4 bg-white text-blue-600 font-semibold text-lg rounded-lg shadow-lg hover:bg-gray-200 transition"
+          className="px-8 py-4 bg-white text-blue-600 font-semibold text-lg rounded-lg shadow-lg hover:bg-gray-200 transition cursor-pointer"
         >
           Register Now
         </button>
         <button
           onClick={() => setShowLogin("login")}
-          className="px-8 py-4 bg-white text-gray-600 font-semibold text-lg rounded-lg shadow-lg hover:bg-gray-300 transition"
+          className="px-8 py-4 bg-white text-gray-600 font-semibold text-lg rounded-lg shadow-lg hover:bg-gray-300 transition cursor-pointer"
         >
           Login
         </button>

@@ -70,14 +70,14 @@ export default function AddTask({ closeModal, postTask }) {
         </select>
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded-lg shadow hover:bg-blue-600 transition-all"
+          className="w-full bg-blue-500 text-white p-2 rounded-lg shadow hover:bg-blue-600 transition-all cursor-pointer"
         >
           Add Task
         </button>
       </form>
       <button
         onClick={closeModal}
-        className="mt-3 w-full text-gray-600 hover:text-black transition-all"
+        className="mt-3 w-full text-gray-600 hover:text-black transition-all cursor-pointer"
       >
         Cancel
       </button>

@@ -125,18 +125,20 @@ export default function AISuggestions() {
           <h2 className="text-lg font-semibold">📊 Task Analysis</h2>
           <button
             onClick={fetchTaskAnalysis}
-            className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600"
+            className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 cursor-pointer"
           >
             Analyze My Tasks
           </button>
           {loading && <p>Loading...</p>}
           {error && <p className="text-red-500">{error}</p>}
           {taskAnalysis && (
-            <div className="mt-3 p-3 border rounded bg-white flex justify-between">
-              <p>{taskAnalysis}</p>
+            <div className="mt-3 p-3 border rounded bg-white flex flex-col md:flex-row md:justify-between items-center gap-2">
+              <p className="text-sm md:text-base text-gray-800 break-words w-full">
+                {taskAnalysis}
+              </p>
               <button
                 onClick={() => saveSuggestion(taskAnalysis)}
-                className="ml-2 bg-gray-400 text-white px-3 py-1 rounded hover:bg-gray-500"
+                className="bg-gray-400 text-white px-3 py-1 text-xs md:px-4 md:py-1 md:text-sm rounded hover:bg-gray-500 cursor-pointer w-20 md:w-auto"
               >
                 Save
               </button>
@@ -149,7 +151,7 @@ export default function AISuggestions() {
           <h2 className="text-lg font-semibold">📝 Suggested Task Templates</h2>
           <button
             onClick={fetchTaskTemplates}
-            className="mt-2 bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600"
+            className="mt-2 bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600 cursor-pointer"
           >
             Generate Task Templates
           </button>
@@ -158,11 +160,16 @@ export default function AISuggestions() {
           {taskTemplates.length > 0 && (
             <ul className="mt-3 p-3 border rounded bg-white">
               {taskTemplates.map((template, index) => (
-                <li key={index} className="mb-2 flex justify-between">
-                  {template}
+                <li
+                  key={index}
+                  className="mb-2 flex flex-col md:flex-row md:justify-between md:items-center gap-2"
+                >
+                  <p className="text-sm md:text-base text-gray-800 break-words w-full">
+                    {template}
+                  </p>
                   <button
                     onClick={() => handleUseTemplate(template)}
-                    className="ml-2 bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+                    className="ml-2 bg-blue-500 text-white px-2 py-1 text-xs md:px-3 md:py-1 md:text-sm rounded hover:bg-blue-600 cursor-pointer w-24 md:w-auto"
                   >
                     Prefill & Edit
                   </button>
@@ -184,18 +191,20 @@ export default function AISuggestions() {
           />
           <button
             onClick={fetchWorkflowSuggestion}
-            className="mt-2 bg-purple-500 text-white px-4 py-2 rounded-lg shadow hover:bg-purple-600"
+            className="mt-2 bg-purple-500 text-white px-4 py-2 rounded-lg shadow hover:bg-purple-600 cursor-pointer"
           >
             Get Workflow Improvement Tips
           </button>
           {loading && <p>Loading...</p>}
           {error && <p className="text-red-500">{error}</p>}
           {workflowSuggestion && (
-            <div className="mt-3 p-3 border rounded bg-white flex justify-between">
-              <p>{workflowSuggestion}</p>
+            <div className="mt-3 p-3 border rounded bg-white flex flex-col md:flex-row md:justify-between items-center gap-2">
+              <p className="text-sm md:text-base text-gray-800 break-words w-full">
+                {workflowSuggestion}
+              </p>
               <button
                 onClick={() => saveSuggestion(workflowSuggestion)}
-                className="ml-2 bg-gray-400 text-white px-3 py-1 rounded hover:bg-gray-500"
+                className="bg-gray-400 text-white px-3 py-1 text-xs md:px-4 md:py-1 md:text-sm rounded hover:bg-gray-500 cursor-pointer w-20 md:w-auto"
               >
                 Save
               </button>
@@ -207,13 +216,16 @@ export default function AISuggestions() {
         {savedSuggestions.length > 0 && (
           <div className="mt-6 border p-4 rounded-lg bg-gray-100">
             <h2 className="text-lg font-semibold">💾 Saved AI Insights</h2>
-            <ul className="mt-3 p-3 border rounded bg-white">
+            <ul className="mt-3 p-3 border rounded bg-white space-y-2">
               {savedSuggestions.map((suggestion, index) => (
-                <li key={index} className="mb-2 flex justify-between">
-                  <span>{suggestion}</span>
+                <li
+                  key={index}
+                  className="p-2 flex flex-col md:flex-row justify-between items-center gap-2 border rounded-lg"
+                >
+                  <span className="text-sm md:text-base">{suggestion}</span>
                   <button
                     onClick={() => removeSuggestion(index)}
-                    className="ml-2 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                    className="bg-red-500 text-white px-3 py-1 md:px-4 md:py-2 text-xs md:text-sm rounded hover:bg-red-600 cursor-pointer"
                   >
                     Remove
                   </button>
@@ -236,13 +248,13 @@ export default function AISuggestions() {
               <div className="mt-4 flex justify-end space-x-2">
                 <button
                   onClick={saveTask}
-                  className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                  className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 cursor-pointer"
                 >
                   Save & Go to Tasks
                 </button>
                 <button
                   onClick={() => setModalTask(null)}
-                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 cursor-pointer"
                 >
                   Cancel
                 </button>
