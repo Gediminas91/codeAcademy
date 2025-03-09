@@ -25,7 +25,7 @@ const Dashboard = () => {
           return;
         }
 
-        const response = await fetch("http://localhost:3000/api/auth/user", {
+        const response = await fetch("http://localhost:3001/api/auth/user", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -44,7 +44,7 @@ const Dashboard = () => {
         const token = localStorage.getItem("token");
 
         // Fetch total tasks
-        const totalRes = await fetch("http://localhost:3000/api/dash/count", {
+        const totalRes = await fetch("http://localhost:3001/api/dash/count", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const totalData = await totalRes.json();
@@ -52,7 +52,7 @@ const Dashboard = () => {
 
         // Fetch task status counts
         const statusRes = await fetch(
-          "http://localhost:3000/api/dash/status-counts",
+          "http://localhost:3001/api/dash/status-counts",
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -61,7 +61,7 @@ const Dashboard = () => {
         setTaskStats(statusData.percentages);
 
         // Fetch recent tasks
-        const recentRes = await fetch("http://localhost:3000/api/dash/recent", {
+        const recentRes = await fetch("http://localhost:3001/api/dash/recent", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const recentData = await recentRes.json();

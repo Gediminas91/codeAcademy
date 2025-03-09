@@ -8,7 +8,7 @@ import AddTask from "../components/AddTask";
 import Navbar from "../components/Navbar";
 import FilterSortControls from "../components/FilterSortControls";
 
-const TASKS_API_URL = "http://localhost:3000/api/tasks";
+const TASKS_API_URL = "http://localhost:3001/api/tasks";
 
 export default function Tasks() {
   const [tasks, setTasks] = useState([]);

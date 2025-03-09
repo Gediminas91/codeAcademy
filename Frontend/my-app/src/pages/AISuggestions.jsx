@@ -2,7 +2,7 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 
-const AI_API_URL = "http://localhost:3000/api/ai";
+const AI_API_URL = "http://localhost:3001/api/ai";
 
 export default function AISuggestions() {
   const [taskAnalysis, setTaskAnalysis] = useState(null);

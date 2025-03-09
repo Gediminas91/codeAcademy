@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import Navbar from "../components/Navbar";
 
-const API_URL = "http://localhost:3000/api/reports";
+const API_URL = "http://localhost:3001/api/reports";
 
 export default function Reports() {
   const [summary, setSummary] = useState(null);

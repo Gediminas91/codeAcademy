@@ -9,7 +9,7 @@ const useAuth = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/auth/${endpoint}`,
+        `http://localhost:3001/api/auth/${endpoint}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
