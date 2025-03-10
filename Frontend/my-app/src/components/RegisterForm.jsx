@@ -13,6 +13,15 @@ const RegisterForm = ({ setShowRegister, setShowHome }) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await handleAuth("register", user);
+    if (response?.token) {
+      localStorage.setItem("token", response.token);
+      navigate("/dashboard");
+    }
+  };
+
   return (
     <div className="bg-white p-8 rounded-lg shadow-lg text-gray-800 w-full max-w-lg py-20">
       {success ? (
@@ -30,17 +39,7 @@ const RegisterForm = ({ setShowRegister, setShowHome }) => {
 
           {error && <p className="text-red-500">{error}</p>}
 
-          <form
-            className="mt-6 space-y-4"
-            onSubmit={async (e) => {
-              e.preventDefault();
-              const response = await handleAuth("register", user);
-              if (response?.token) {
-                localStorage.setItem("token", response.token); // ✅ Save token after registration
-                navigate("/dashboard"); // ✅ Redirect to dashboard
-              }
-            }}
-          >
+          <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
             <InputField
               type="text"
               name="name"
@@ -62,25 +61,26 @@ const RegisterForm = ({ setShowRegister, setShowHome }) => {
               value={user.password}
               onChange={handleChange}
             />
-            <Button text="Register" />
+            <Button
+              text="Register"
+              className="w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition cursor-pointer"
+            />
           </form>
 
           <p className="mt-4 text-center text-gray-600">
             Already have an account?{" "}
-            <button
+            <Button
+              text="Login"
               onClick={() => setShowRegister("login")}
               className="text-blue-600 hover:underline cursor-pointer"
-            >
-              Login
-            </button>
+            />
           </p>
 
-          <button
+          <Button
+            text="Back to Home"
             onClick={() => setShowHome(null)}
             className="mt-4 text-blue-600 hover:underline block text-center cursor-pointer"
-          >
-            Back to Home
-          </button>
+          />
         </>
       )}
     </div>

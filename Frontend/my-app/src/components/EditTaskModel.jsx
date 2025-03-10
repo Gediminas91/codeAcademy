@@ -1,41 +1,20 @@
-import { useState } from "react";
 import Button from "../utils/Button";
 
-export default function AddTask({ closeModal, postTask }) {
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    priority: "low",
-    status: "Pending",
-  });
-  const [successMessage, setSuccessMessage] = useState("");
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await postTask(formData);
-    setSuccessMessage("✔ Task successfully added!");
-    setTimeout(() => {
-      setSuccessMessage("");
-      closeModal();
-    }, 1500);
-  };
-
+const EditTaskModal = ({
+  updatedData,
+  handleChange,
+  handleUpdate,
+  setIsEditing,
+}) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75 p-6 z-50">
       <div className="bg-gray-100 p-6 rounded-lg shadow-xl w-96 border border-gray-300">
-        <h2 className="text-lg font-bold mb-4 text-gray-800">Add New Task</h2>
-        {successMessage && (
-          <p className="text-green-600 font-semibold">{successMessage}</p>
-        )}
-        <form onSubmit={handleSubmit} className="space-y-3">
+        <h2 className="text-lg font-bold mb-4 text-gray-800">Edit Task</h2>
+        <form onSubmit={handleUpdate} className="space-y-3">
           <input
             type="text"
             name="title"
-            value={formData.title}
+            value={updatedData.title}
             onChange={handleChange}
             placeholder="Task Title"
             className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -43,14 +22,17 @@ export default function AddTask({ closeModal, postTask }) {
           />
           <textarea
             name="description"
-            value={formData.description}
+            value={updatedData.description}
             onChange={handleChange}
             placeholder="Task Description"
             className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
           ></textarea>
+          <label className="text-sm font-semibold text-gray-600">
+            Priority:
+          </label>
           <select
             name="priority"
-            value={formData.priority}
+            value={updatedData.priority}
             onChange={handleChange}
             className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
           >
@@ -58,9 +40,10 @@ export default function AddTask({ closeModal, postTask }) {
             <option value="medium">Medium</option>
             <option value="high">High</option>
           </select>
+          <label className="text-sm font-semibold text-gray-600">Status:</label>
           <select
             name="status"
-            value={formData.status}
+            value={updatedData.status}
             onChange={handleChange}
             className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
           >
@@ -69,17 +52,20 @@ export default function AddTask({ closeModal, postTask }) {
             <option value="Completed">Completed</option>
           </select>
           <Button
-            text="Add Task"
+            text="Save Changes"
             type="submit"
             className="w-full bg-blue-500 text-white p-2 rounded-lg shadow hover:bg-blue-600 transition-all cursor-pointer"
           />
+          <Button
+            text="Cancel"
+            onClick={() => setIsEditing(false)}
+            type="button"
+            className="w-full text-gray-600 hover:text-black transition-all cursor-pointer"
+          />
         </form>
-        <Button
-          text="Cancel"
-          onClick={closeModal}
-          className="mt-3 w-full text-gray-600 hover:text-black transition-all cursor-pointer"
-        />
       </div>
     </div>
   );
-}
+};
+
+export default EditTaskModal;

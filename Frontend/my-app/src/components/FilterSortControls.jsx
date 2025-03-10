@@ -1,19 +1,16 @@
 export default function FilterSortControls({ filters, setFilters }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFilters((prev) => ({ ...prev, [name]: value })); // ✅ Directly update global state
+    setFilters((prev) => ({ ...prev, [name]: value }));
   };
 
   const selectClasses =
     "p-1 md:p-2 text-xs md:text-sm border rounded w-24 sm:w-auto";
   return (
     <div className="flex flex-wrap gap-2 sm:gap-4 mb-4">
-      {/* Common class for uniform styling */}
-
-      {/* Filter by Status */}
       <select
         name="status"
-        value={filters.status} // ✅ Now correctly uses the global state
+        value={filters.status}
         onChange={handleChange}
         className={selectClasses}
       >
@@ -22,11 +19,9 @@ export default function FilterSortControls({ filters, setFilters }) {
         <option value="In Progress">In Progress</option>
         <option value="Completed">Completed</option>
       </select>
-
-      {/* Filter by Priority */}
       <select
         name="priority"
-        value={filters.priority} // ✅ Now correctly uses the global state
+        value={filters.priority}
         onChange={handleChange}
         className={selectClasses}
       >
@@ -35,11 +30,9 @@ export default function FilterSortControls({ filters, setFilters }) {
         <option value="medium">Medium</option>
         <option value="high">High</option>
       </select>
-
-      {/* Sort By */}
       <select
         name="sortBy"
-        value={filters.sortBy} // ✅ Now correctly uses the global state
+        value={filters.sortBy}
         onChange={handleChange}
         className={selectClasses}
       >

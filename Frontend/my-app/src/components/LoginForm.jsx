@@ -11,6 +11,11 @@ const LoginForm = ({ setShowLogin, setShowRegister }) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    handleAuth("login", credentials);
+  };
+
   return (
     <div className="bg-white p-8 rounded-lg shadow-lg text-gray-800 w-full max-w-lg py-20">
       {success ? (
@@ -28,13 +33,7 @@ const LoginForm = ({ setShowLogin, setShowRegister }) => {
 
           {error && <p className="text-red-500">{error}</p>}
 
-          <form
-            className="mt-6 space-y-4"
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleAuth("login", credentials);
-            }}
-          >
+          <form className="mt-6 space-y-4" onSubmit={handleLogin}>
             <InputField
               type="email"
               name="email"
@@ -49,25 +48,26 @@ const LoginForm = ({ setShowLogin, setShowRegister }) => {
               value={credentials.password}
               onChange={handleChange}
             />
-            <Button text="Sign In" />
+            <Button
+              text="Sign In"
+              className="w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition cursor-pointer"
+            />
           </form>
 
           <p className="mt-4 text-center text-gray-600">
             Don't have an account?{" "}
-            <button
+            <Button
+              text="Register"
               onClick={() => setShowRegister("register")}
               className="text-blue-600 hover:underline cursor-pointer"
-            >
-              Register
-            </button>
+            />
           </p>
 
-          <button
+          <Button
+            text="Back to Home"
             onClick={() => setShowLogin(null)}
             className="mt-4 text-blue-600 hover:underline block text-center cursor-pointer"
-          >
-            Back to Home
-          </button>
+          />
         </>
       )}
     </div>

@@ -10,7 +10,7 @@ const HeroSection = ({ setShowRegister, setShowLogin }) => {
 
       {/* Image - Visible Only on Mobile */}
       <div className="mt-6 flex justify-center md:hidden">
-        <img src={Tasks} alt="Task Management" className="w-4/5 lg:w-2/5" />
+        <img src={Tasks} alt="Task Management" className="w-3/5 lg:w-2/5" />
       </div>
 
       {/* Hide Description & Features on Mobile, Show on Desktop */}
