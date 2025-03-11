@@ -5,7 +5,6 @@ import { db } from "../config/db.js";
 
 const router = express.Router();
 
-// ✅ 1️⃣ Task Summary Stats
 router.get("/summary", authenticateUser, async (req, res) => {
   try {
     const userId = new ObjectId(req.user.userId);
@@ -34,7 +33,6 @@ router.get("/summary", authenticateUser, async (req, res) => {
   }
 });
 
-// ✅ 2️⃣ Weekly, Monthly, and Yearly Reports
 router.get("/trends", authenticateUser, async (req, res) => {
   try {
     const userId = new ObjectId(req.user.userId);
@@ -73,7 +71,6 @@ router.get("/trends", authenticateUser, async (req, res) => {
   }
 });
 
-// ✅ 3️⃣ Task Completion Timeline (for Graphs)
 router.get("/completion-timeline", authenticateUser, async (req, res) => {
   try {
     const userId = new ObjectId(req.user.userId);
@@ -102,7 +99,6 @@ router.get("/completion-timeline", authenticateUser, async (req, res) => {
   }
 });
 
-// ✅ 4️⃣ AI-Based Productivity Score
 router.get("/productivity-score", authenticateUser, async (req, res) => {
   try {
     const userId = new ObjectId(req.user.userId);

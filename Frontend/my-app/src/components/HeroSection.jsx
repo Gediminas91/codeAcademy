@@ -1,19 +1,15 @@
 import Tasks from "../assets/Tasks.svg";
+import Button from "../utils/Button";
 
 const HeroSection = ({ setShowRegister, setShowLogin }) => {
   return (
     <>
-      {/* Heading - Always Visible */}
       <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold text-white text-center md:text-left">
         Task Management & To-Do List App
       </h1>
-
-      {/* Image - Visible Only on Mobile */}
       <div className="mt-6 flex justify-center md:hidden">
         <img src={Tasks} alt="Task Management" className="w-3/5 lg:w-2/5" />
       </div>
-
-      {/* Hide Description & Features on Mobile, Show on Desktop */}
       <p className="hidden md:block mt-4 md:mt-6 text-lg md:text-base lg:text-xl text-white max-w-xl">
         Task Management & To-Do List application is designed to help you better
         manage your task workflow efficiently. This application is specially for
@@ -38,21 +34,17 @@ const HeroSection = ({ setShowRegister, setShowLogin }) => {
           <span className="text-pink-300 text-xl">✔</span> AI Features
         </li>
       </ul>
-
-      {/* Buttons - Always Visible, Centered on Mobile */}
       <div className="mt-6 flex flex-col space-y-4 items-center md:items-start">
-        <button
+        <Button
+          text="Login"
           onClick={() => setShowLogin("login")}
           className="px-8 py-4 w-full max-w-xs bg-white text-gray-600 font-semibold text-lg rounded-lg shadow-lg hover:bg-gray-300 transition cursor-pointer"
-        >
-          Login
-        </button>
-        <button
+        />
+        <Button
+          text="Register Now"
           onClick={() => setShowRegister("register")}
           className="px-8 py-4 w-full max-w-xs bg-white text-blue-600 font-semibold text-lg rounded-lg shadow-lg hover:bg-gray-200 transition cursor-pointer"
-        >
-          Register Now
-        </button>
+        />
       </div>
     </>
   );

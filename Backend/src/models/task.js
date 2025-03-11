@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
 import db from "../config/db.js";
 
-const tasksCollection = db.collection("Tasks"); // Reference to the 'tasks' collection
+const tasksCollection = db.collection("Tasks");
 
 const Task = {
   async createTask(userId, title, description, priority) {
@@ -9,8 +9,8 @@ const Task = {
       userId: new ObjectId(userId),
       title,
       description,
-      priority: priority || "Low", // ✅ Default Priority
-      status: "pending", // ✅ Fix: Set default status
+      priority: priority || "Low",
+      status: "pending",
       createdAt: new Date(),
       updatedAt: null,
       completedAt: null,
@@ -28,10 +28,10 @@ const Task = {
 
   async updateTask(taskId, updates) {
     if (updates.status === "completed") {
-      updates.completedAt = new Date(); // ✅ Set completion time when marked completed
+      updates.completedAt = new Date();
     }
 
-    updates.updatedAt = new Date(); // ✅ Always update last modified time
+    updates.updatedAt = new Date();
 
     return await tasksCollection.updateOne(
       { _id: new ObjectId(taskId) },

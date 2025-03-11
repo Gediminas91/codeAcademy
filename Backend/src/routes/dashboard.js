@@ -48,20 +48,19 @@ router.get("/status-counts", authenticateUser, async (req, res) => {
   }
 });
 
-// 3️⃣ Get Recent Activity (Last 3 Tasks)
 router.get("/recent", authenticateUser, async (req, res) => {
   try {
     const tasksCollection = db.collection("Tasks");
 
     const recentTasks = await tasksCollection
-      .find({ userId: req.user.userId }) // ✅ Use converted ObjectId
-      .sort({ date: -1, _id: -1 }) // ✅ Sort safely
+      .find({ userId: req.user.userId })
+      .sort({ date: -1, _id: -1 })
       .limit(3)
-      .toArray(); // ✅ Convert cursor to array
+      .toArray();
 
     res.json(recentTasks);
   } catch (error) {
-    console.error("Error fetching recent tasks:", error); // ✅ Debugging log
+    console.error("Error fetching recent tasks:", error);
     res.status(500).json({ error: "Error fetching recent tasks" });
   }
 });

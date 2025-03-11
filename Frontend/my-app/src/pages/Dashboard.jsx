@@ -8,7 +8,6 @@ import { useDashboardData } from "../hooks/useDashboardData";
 const Dashboard = () => {
   const { user, totalTasks, taskStats, recentTasks } = useDashboardData();
 
-  // Pie chart data
   const pieData = [
     { name: "Completed", value: parseFloat(taskStats.completed) },
     { name: "In Progress", value: parseFloat(taskStats.inProgress) },

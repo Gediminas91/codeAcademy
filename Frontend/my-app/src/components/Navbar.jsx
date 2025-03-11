@@ -6,7 +6,7 @@ import { FaSignOutAlt, FaBars, FaTimes } from "react-icons/fa";
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [isOpen, setIsOpen] = useState(false); // ✅ State to toggle menu
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -15,12 +15,10 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white shadow-md py-4 px-8 flex justify-between items-center">
-      {/* Logo */}
       <div className="flex items-center space-x-6">
         <img src={TaskManager} alt="Logo" className="h-10 w-10" />
       </div>
 
-      {/* Desktop Navigation */}
       <div className="hidden md:flex space-x-6">
         {[
           { path: "/dashboard", label: "Dashboard" },
@@ -42,7 +40,6 @@ const Navbar = () => {
         ))}
       </div>
 
-      {/* Mobile Menu Button */}
       <button
         className="md:hidden text-gray-700 text-2xl"
         onClick={() => setIsOpen(!isOpen)}
@@ -50,7 +47,6 @@ const Navbar = () => {
         {isOpen ? <FaTimes /> : <FaBars />}
       </button>
 
-      {/* Mobile Navigation */}
       {isOpen && (
         <div className="absolute top-16 left-0 w-full bg-white shadow-lg flex flex-col items-center py-4 space-y-4 md:hidden">
           {[
@@ -67,13 +63,12 @@ const Navbar = () => {
                   ? "text-blue-600 font-semibold border-b-2 border-blue-600 pb-1"
                   : ""
               }`}
-              onClick={() => setIsOpen(false)} // ✅ Close menu on click
+              onClick={() => setIsOpen(false)}
             >
               {link.label}
             </Link>
           ))}
 
-          {/* Logout Button in Mobile */}
           <button
             onClick={handleLogout}
             className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition flex items-center gap-2 cursor-pointer"
@@ -84,7 +79,6 @@ const Navbar = () => {
         </div>
       )}
 
-      {/* Logout Button (Desktop) */}
       <button
         onClick={handleLogout}
         className="hidden md:flex bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition flex items-center gap-2 cursor-pointer"

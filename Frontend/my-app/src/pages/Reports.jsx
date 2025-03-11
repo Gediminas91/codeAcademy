@@ -1,15 +1,9 @@
 import { useEffect, useState } from "react";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  LineChart,
-  Line,
-  ResponsiveContainer,
-} from "recharts";
 import Navbar from "../components/Navbar";
+import TaskSummary from "../components/TaskSummary";
+import TaskTrends from "../components/TaskTrends";
+import TaskTimeline from "../components/TaskTimeline";
+import ProductivityScore from "../components/ProductivityScore";
 
 const API_URL = "http://localhost:3001/api/reports";
 
@@ -63,85 +57,13 @@ export default function Reports() {
       <div className="p-6">
         <h1 className="text-2xl font-bold mb-4">📊 Reports & Analytics</h1>
 
-        {/* Task Summary */}
-        {summary && (
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-6">
-            <StatCard
-              title="Total Tasks"
-              value={summary.totalTasks}
-              color="blue"
-            />
-            <StatCard
-              title="Completed Tasks"
-              value={summary.completedTasks}
-              color="green"
-            />
-            <StatCard
-              title="Pending Tasks"
-              value={summary.pendingTasks}
-              color="red"
-            />
-          </div>
-        )}
-
-        {/* Trends Report */}
-        {trends && (
-          <div className="bg-gray-100 p-4 rounded-lg shadow mb-6">
-            <h2 className="text-lg font-semibold">📅 Task Trends</h2>
-            <ResponsiveContainer width="100%" height={250}>
-              <BarChart data={[trends]}>
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="weeklyTasks" fill="#3498db" name="Weekly" />
-                <Bar dataKey="monthlyTasks" fill="#2ecc71" name="Monthly" />
-                <Bar dataKey="yearlyTasks" fill="#e74c3c" name="Yearly" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        )}
-
-        {/* Completion Timeline */}
-        {timeline && (
-          <div className="bg-gray-100 p-4 rounded-lg shadow mb-6">
-            <h2 className="text-lg font-semibold">📈 Completion Timeline</h2>
-            <ResponsiveContainer width="100%" height={250}>
-              <LineChart data={timeline}>
-                <XAxis dataKey="title" />
-                <YAxis />
-                <Tooltip
-                  formatter={
-                    (value) => new Date(value).toLocaleDateString() // Format timestamp to date
-                  }
-                />
-                <Line type="monotone" dataKey="completedAt" stroke="#3498db" />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        )}
-
-        {/* Productivity Score */}
+        {summary && <TaskSummary summary={summary} />}
+        {trends && <TaskTrends trends={trends} />}
+        {timeline && <TaskTimeline timeline={timeline} />}
         {productivityScore !== null && (
-          <div className="bg-gray-100 p-4 rounded-lg shadow">
-            <h2 className="text-lg font-semibold">
-              💡 Productivity Score: {productivityScore}%
-            </h2>
-            <p className="text-sm text-gray-600">
-              {productivityScore > 70
-                ? "You're doing great! Keep up the good work! 🚀"
-                : "Try focusing on high-priority tasks to improve your efficiency."}
-            </p>
-          </div>
+          <ProductivityScore productivityScore={productivityScore} />
         )}
       </div>
     </>
   );
 }
-
-// 📌 Reusable Stat Card Component
-const StatCard = ({ title, value, color }) => (
-  <div className={`p-4 rounded-lg shadow bg-${color}-100`}>
-    <h3 className="text-lg font-semibold">{title}</h3>
-    <p className="text-2xl font-bold">{value}</p>
-  </div>
-);

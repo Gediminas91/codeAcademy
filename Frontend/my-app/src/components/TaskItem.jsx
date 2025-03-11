@@ -48,7 +48,6 @@ export default function TaskItem({ task, updateTask, deleteTask }) {
           completedAt={task.completedAt}
           status={task.status}
         />
-        {/* AI Suggestion Box */}
         <AIsuggestion
           showSuggestion={showSuggestion}
           setShowSuggestion={setShowSuggestion}
@@ -83,7 +82,6 @@ export default function TaskItem({ task, updateTask, deleteTask }) {
           />
         ))}
       </div>
-      {/* Editing Modal */}
       {isEditing && (
         <EditTaskModal
           updatedData={updatedData}
